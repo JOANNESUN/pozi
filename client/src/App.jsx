@@ -9,7 +9,7 @@ const App = () => {
   return (
     <div className="layout">
       <div className="map-area">
-        <MapInteractive onDirectMapSelect={setSelectedLocation} />
+        <MapInteractive location={selectedLocation} onLocationSelect={setSelectedLocation} />
       </div>
       <div className="panel">
         <FeedbackForm location={selectedLocation} />

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import styles from "./MapInteractive.module.css";
@@ -14,14 +13,11 @@ const MapClickHandler = ({ onMapClick }) => {
   return null;
 };
 
-const MapInteractive = ({ onDirectMapSelect }) => {
+const MapInteractive = ({ location, onLocationSelect }) => {
   const position = [-37.8331, 144.9722]; // Anzac station, Melbourne, Australia
 
-  const [mapClickPosition, setMapClickPosition] = useState(null);
-
   const handleAddMarker = (lat, lng) => {
-    setMapClickPosition([lat, lng]);
-    onDirectMapSelect({ lat, lng });
+    onLocationSelect({ lat, lng });
   };
 
   return (
@@ -32,7 +28,7 @@ const MapInteractive = ({ onDirectMapSelect }) => {
       />
 
       <MapClickHandler onMapClick={handleAddMarker} />
-      {mapClickPosition && <Marker position={mapClickPosition} />}
+      {location && <Marker position={location} />}
     </MapContainer>
   );
 };
