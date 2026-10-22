@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css'; 
-import styles from './MapInteractive.module.css';
+import { useState } from "react";
+import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+import styles from "./MapInteractive.module.css";
 
 const MapClickHandler = ({ onMapClick }) => {
   useMapEvents({
@@ -11,19 +11,18 @@ const MapClickHandler = ({ onMapClick }) => {
     },
   });
 
-  return null; 
-}
+  return null;
+};
 
-
-const QuickMap = () => {
+const MapInteractive = ({ onDirectMapSelect }) => {
   const position = [-37.8331, 144.9722]; // Anzac station, Melbourne, Australia
 
   const [mapClickPosition, setMapClickPosition] = useState(null);
-  const [comment, setComment] = useState('');
 
   const handleAddMarker = (lat, lng) => {
     setMapClickPosition([lat, lng]);
-  }
+    onDirectMapSelect({ lat, lng });
+  };
 
   return (
     <MapContainer center={position} zoom={13} scrollWheelZoom={false} className={styles.map}>
@@ -33,20 +32,9 @@ const QuickMap = () => {
       />
 
       <MapClickHandler onMapClick={handleAddMarker} />
-      {mapClickPosition && (
-        <Marker position={mapClickPosition}>
-          <Popup>
-            <textarea
-              placeholder="Add a comment..."
-              value={comment}
-              onChange={(e) => setComment(e.target.value)}
-            />
-            <br />
-          </Popup>
-        </Marker>
-      )}
+      {mapClickPosition && <Marker position={mapClickPosition} />}
     </MapContainer>
-);
-}
+  );
+};
 
-export default QuickMap;
+export default MapInteractive;

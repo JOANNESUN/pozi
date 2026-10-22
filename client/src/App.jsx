@@ -1,14 +1,21 @@
+import { useState } from "react";
 import "./App.css";
-import QuickMap from "./components/MapInteractive.jsx";
+import MapInteractive from "./components/MapInteractive.jsx";
+import FeedbackForm from "./components/FeedbackForm.jsx";
 
-function App() {
+const App = () => {
+  const [selectedLocation, setSelectedLocation] = useState(null);
+
   return (
-    <>
-      <div>
-        <QuickMap />
+    <div className="layout">
+      <div className="map-area">
+        <MapInteractive onDirectMapSelect={setSelectedLocation} />
       </div>
-    </>
+      <div className="panel">
+        <FeedbackForm location={selectedLocation} />
+      </div>
+    </div>
   );
-}
+};
 
 export default App;

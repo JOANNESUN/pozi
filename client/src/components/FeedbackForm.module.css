@@ -1,0 +1,60 @@
+.actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.button {
+  padding: 8px 16px;
+  border-radius: 6px;
+  font: inherit;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+/* Main action: filled */
+.primary {
+  composes: button;
+  background: var(--accent);
+  color: var(--bg);
+  border: 1px solid var(--accent);
+}
+
+.primary:hover {
+  opacity: 0.9;
+}
+
+/* Secondary action: outlined, so it doesn't compete with Submit */
+.secondary {
+  composes: button;
+  background: transparent;
+  color: var(--text-h);
+  border: 1px solid var(--border);
+}
+
+.secondary:hover {
+  border-color: var(--accent-border);
+}
+
+.input {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 96px;
+  max-height: 240px;
+  field-sizing: content; /* grows with the text where supported */
+  padding: 10px 12px;
+  font: inherit;
+  font-size: 15px;
+  color: var(--text-h);
+  background-color: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  resize: vertical;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-bg);
+}
