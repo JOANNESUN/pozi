@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import MapInteractive from "./components/MapInteractive.jsx";
 import FeedbackForm from "./components/FeedbackForm.jsx";
+import FeedbackHistory from "./components/FeedbackHistory.jsx";
 import { fetchFeedback } from "./api/feedbackApi.js";
 
 const App = () => {
   const [notice, setNotice] = useState(null);
   const [selectedLocation, setSelectedLocation] = useState(null);
+  const [categoryFilter, setCategoryFilter] = useState("all");
   const [features, setFeatures] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [loadError, setLoadError] = useState(null);
@@ -21,6 +23,13 @@ const App = () => {
     setSelectedLocation(null);
     setNotice("Feedback added");
   };
+
+  const filteredFeatures =
+    categoryFilter === "all"
+      ? features
+      : features.filter(
+          (feature) => feature.properties.category === categoryFilter,
+        );
 
   const handleCancel = () => setSelectedLocation(null);
 
@@ -47,18 +56,15 @@ const App = () => {
             onCancel={handleCancel}
           />
         ) : (
-          <div>
-            {/* Temporary: replaced by FeedbackHistory in step 5 */}
-            <h2>Feedback history</h2>
-            {notice && <p role="status">{notice}</p>}
-            <p>
-              {isLoading && "Loading feedback…"}
-              {loadError && `Couldn't load feedback: ${loadError}`}
-              {!isLoading &&
-                !loadError &&
-                `${features.length} feedback · click the map to add yours`}
-            </p>
-          </div>
+          <FeedbackHistory
+            features={filteredFeatures}
+            totalCount={features.length}
+            isLoading={isLoading}
+            loadError={loadError}
+            notice={notice}
+            categoryFilter={categoryFilter}
+            onCategoryFilterChange={setCategoryFilter}
+          />
         )}
       </div>
     </div>
