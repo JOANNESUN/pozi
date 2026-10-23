@@ -1,5 +1,8 @@
 import { CATEGORIES, getCategory } from "../constants/categories.js";
 import { formatDate } from "../utils/formatDate.js";
+import { toCsv } from "../utils/toCsv.js";
+import { downloadFile } from "../utils/downloadFile.js";
+
 import styles from "./FeedbackHistory.module.css";
 
 const FeedbackHistory = ({
@@ -14,6 +17,16 @@ const FeedbackHistory = ({
   const newestFirst = [...features].sort((a, b) =>
     b.properties.created_at.localeCompare(a.properties.created_at),
   );
+
+  const handleExport = () => {
+  const today = new Date().toISOString().slice(0, 10);
+  downloadFile(
+    "\uFEFF" + toCsv(newestFirst),
+    `feedback-${today}.csv`,
+    "text/csv;charset=utf-8",
+  );
+};
+
 
   return (
     <div className={styles.history}>
@@ -91,7 +104,7 @@ const FeedbackHistory = ({
           <button type="button" className={styles.secondary} disabled>
             Import GeoJSON
           </button>
-          <button type="button" className={styles.secondary} disabled>
+          <button type="button" onClick={handleExport} className={styles.secondary} disabled={newestFirst.length === 0}>
             Export CSV
           </button>
         </div>
