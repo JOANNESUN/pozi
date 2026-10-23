@@ -1,6 +1,6 @@
 # Pozi Community Feedback Map
 
-A web app for residents to report issues on a map (potholes, fallen trees, injured animals and so on), see what others have reported, export the reports to CSV, and import past feedback from a GeoJSON file.
+A mobile friendly web app for residents to report issues on a map (potholes, fallen trees, injured animals and so on), see what others have reported, export the reports to CSV, and import past feedback from a GeoJSON file.
 
 ## Features
 
