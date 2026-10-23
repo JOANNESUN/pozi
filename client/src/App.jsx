@@ -3,7 +3,7 @@ import "./App.css";
 import MapInteractive from "./components/MapInteractive.jsx";
 import FeedbackForm from "./components/FeedbackForm.jsx";
 import FeedbackHistory from "./components/FeedbackHistory.jsx";
-import { fetchFeedback } from "./api/feedbackApi.js";
+import { fetchFeedback, importFeedback } from "./api/feedbackApi.js";
 
 const App = () => {
   const [notice, setNotice] = useState(null);
@@ -32,6 +32,25 @@ const App = () => {
         );
 
   const handleCancel = () => setSelectedLocation(null);
+
+  const handleImportFile = async (file) => {
+    try {
+      const collection = JSON.parse(await file.text());
+      const { imported, rejectedCount } = await importFeedback(collection);
+      setFeatures((current) => [...imported, ...current]);
+      setNotice(
+        rejectedCount > 0
+          ? `Imported ${imported.length} feedback, skipped ${rejectedCount} invalid`
+          : `Imported ${imported.length} feedback`,
+      );
+    } catch (error) {
+      setNotice(
+        error instanceof SyntaxError
+          ? "Import failed: the file isn't valid JSON"
+          : `Import failed: ${error.message}`,
+      );
+    }
+  };
 
   useEffect(() => {
     fetchFeedback()
@@ -65,6 +84,7 @@ const App = () => {
             notice={notice}
             categoryFilter={categoryFilter}
             onCategoryFilterChange={setCategoryFilter}
+            onImportFile={handleImportFile}
           />
         )}
       </div>

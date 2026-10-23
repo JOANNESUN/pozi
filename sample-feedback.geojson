@@ -1,0 +1,11 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    { "type": "Feature", "geometry": { "type": "Point", "coordinates": [144.9631, -37.8136] }, "properties": { "category": "pothole", "comment": "Deep pothole outside Flinders Street Station", "created_at": "2026-09-14T08:30:00Z" } },
+    { "type": "Feature", "geometry": { "type": "Point", "coordinates": [144.9796, -37.8304] }, "properties": { "category": "tree_down", "comment": "Large branch blocking the Domain Parklands path", "created_at": "2026-09-20T17:05:00Z" } },
+    { "type": "Feature", "geometry": { "type": "Point", "coordinates": [144.9925, -37.8183] }, "properties": { "category": "injured_animal", "comment": "Injured possum near Richmond Station", "created_at": "2026-10-01T06:45:00Z" } },
+    { "type": "Feature", "geometry": { "type": "Point", "coordinates": [144.9568, -37.8226] }, "properties": { "category": "dead_animal", "comment": "Dead bird on the Southbank promenade", "created_at": "2026-10-05T12:10:00Z" } },
+    { "type": "Feature", "geometry": { "type": "Point", "coordinates": [144.9834, -37.8102] }, "properties": { "category": "other", "comment": "Broken bench in Fitzroy Gardens", "created_at": "2026-10-11T09:00:00Z" } },
+    { "type": "Feature", "geometry": { "type": "Point", "coordinates": [144.9665, -37.7983] }, "properties": { "category": "pothole", "comment": "Potholes along Lygon Street, Carlton", "created_at": "2026-10-18T15:20:00Z" } }
+  ]
+}

@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { CATEGORIES, getCategory } from "../constants/categories.js";
 import { formatDate } from "../utils/formatDate.js";
 import { toCsv } from "../utils/toCsv.js";
@@ -13,20 +14,28 @@ const FeedbackHistory = ({
   notice,
   categoryFilter,
   onCategoryFilterChange,
+  onImportFile,
 }) => {
+  const fileInputRef = useRef(null);
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) onImportFile(file);
+    event.target.value = "";
+  };
+
   const newestFirst = [...features].sort((a, b) =>
     b.properties.created_at.localeCompare(a.properties.created_at),
   );
 
   const handleExport = () => {
-  const today = new Date().toISOString().slice(0, 10);
-  downloadFile(
-    "\uFEFF" + toCsv(newestFirst),
-    `feedback-${today}.csv`,
-    "text/csv;charset=utf-8",
-  );
-};
-
+    const today = new Date().toISOString().slice(0, 10);
+    downloadFile(
+      "\uFEFF" + toCsv(newestFirst),
+      `feedback-${today}.csv`,
+      "text/csv;charset=utf-8",
+    );
+  };
 
   return (
     <div className={styles.history}>
@@ -101,10 +110,22 @@ const FeedbackHistory = ({
           📍 Click anywhere on the map to add feedback
         </p>
         <div className={styles.actions}>
-          <button type="button" className={styles.secondary} disabled>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept=".geojson,.json,application/geo+json"
+            onChange={handleFileChange}
+            hidden
+          />
+          <button type="button" className={styles.secondary} onClick={() => fileInputRef.current.click()}>
             Import GeoJSON
           </button>
-          <button type="button" onClick={handleExport} className={styles.secondary} disabled={newestFirst.length === 0}>
+          <button
+            type="button"
+            onClick={handleExport}
+            className={styles.secondary}
+            disabled={newestFirst.length === 0}
+          >
             Export CSV
           </button>
         </div>
