@@ -45,6 +45,7 @@ const App = () => {
       <div className="map-area">
         <MapInteractive
           location={selectedLocation}
+          features={filteredFeatures}
           onLocationSelect={handleLocationSelect}
         />
       </div>

@@ -1,11 +1,6 @@
 import { CATEGORIES, getCategory } from "../constants/categories.js";
+import { formatDate } from "../utils/formatDate.js";
 import styles from "./FeedbackHistory.module.css";
-
-const formatDate = (isoString) =>
-  new Date(isoString).toLocaleDateString("en-AU", {
-    day: "numeric",
-    month: "short",
-  });
 
 const FeedbackHistory = ({
   features,

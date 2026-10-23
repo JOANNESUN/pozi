@@ -1,5 +1,42 @@
+.wrapper {
+  position: relative;
+  height: 100%;
+}
+
 .map {
   width: 100%;
   height: 100vh;
   border-radius: 8px;
+}
+
+.categoryKey {
+  position: absolute;
+  left: 12px;
+  bottom: 28px;
+  z-index: 1000;
+  margin: 0;
+  padding: 10px 12px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #1f2937;
+  font-size: 13px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.categoryKey li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25);
 }
