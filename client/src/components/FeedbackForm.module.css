@@ -12,7 +12,6 @@
   cursor: pointer;
 }
 
-/* Main action: filled */
 .primary {
   composes: button;
   background: var(--accent);
@@ -24,16 +23,22 @@
   opacity: 0.9;
 }
 
-/* Secondary action: outlined, so it doesn't compete with Submit */
 .secondary {
   composes: button;
-  background: transparent;
+  background: var(--field-bg);
   color: var(--text-h);
-  border: 1px solid var(--border);
+  border: 1px solid var(--field-border);
 }
 
 .secondary:hover {
-  border-color: var(--accent-border);
+  border-color: var(--field-border-hover);
+}
+
+.primary:focus-visible,
+.secondary:focus-visible,
+.link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 .input {
@@ -42,19 +47,70 @@
   box-sizing: border-box;
   min-height: 96px;
   max-height: 240px;
-  field-sizing: content; /* grows with the text where supported */
+  field-sizing: content;
   padding: 10px 12px;
   font: inherit;
   font-size: 15px;
   color: var(--text-h);
-  background-color: var(--code-bg);
-  border: 1px solid var(--border);
+  background-color: var(--field-bg);
+  border: 1px solid var(--field-border);
   border-radius: 6px;
   resize: vertical;
+}
+
+.input::placeholder {
+  color: var(--placeholder);
+}
+
+.input:hover {
+  border-color: var(--field-border-hover);
+}
+
+.select {
+  composes: input;
+  min-height: auto;
+  resize: none;
+  cursor: pointer;
+  appearance: none;
+  padding-right: 36px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23f3f4f6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
 }
 
 .input:focus {
   outline: none;
   border-color: var(--accent);
   box-shadow: 0 0 0 3px var(--accent-bg);
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 12px 0 4px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-h);
+}
+
+.error {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: #f87171;
+}
+
+.coords {
+  font-family: var(--mono);
+  font-size: 13px;
+}
+
+.link {
+  padding: 0;
+  background: none;
+  border: none;
+  color: var(--accent);
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
 }
